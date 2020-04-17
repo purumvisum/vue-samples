@@ -1,0 +1,31 @@
+<html>
+<head>
+    <title>Привет, Vue</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <input type="color" v-model="color"/>
+    <div :style="[{'backgroundColor': color, 'color': 'white'}, niceStyle]">
+        Text
+    </div>
+</div>
+
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.js"></script>
+<script>
+    new Vue({
+        el: '.container',
+        data: {
+            color: "#005566",
+            niceStyle: {
+                color: 'white',
+                height: '100px',
+                textAlign: 'center',
+                fontSize: '30px'
+            }
+        }
+    })
+</script>
+</html>

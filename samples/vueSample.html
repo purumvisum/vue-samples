@@ -1,0 +1,67 @@
+<html>
+<head>
+    <title>Привет, Vue</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div id="app" class="container">
+    <h1>Hi,
+        <span v-if="gender === 'female'">
+            Ms.
+        </span>
+        <span v-else-if="gender === 'male'">
+            Mr.
+        </span>
+        <span v-else>
+            ???
+        </span>
+        {{ name }}
+    </h1>
+
+    <br/>
+    <br/>
+
+    <label for="gender">Choose your gender:</label>
+    <select  class="custom-select" id ="gender" v-model="gender">
+        <option value = "female">female</option>
+        <option value = "male">male</option>
+        <option value = "??">??</option>
+    </select>
+    <br/>
+    <label for="name">Enter your name:</label>
+    <input class="form-control" type="text" placeholder="name" id="name" v-model="name">
+
+    <br/>
+    <br/>
+
+    <h3>Your Data</h3>
+    <ul class="list-group">
+        <li
+                v-for="(value, key, index) in attr"
+                :key="index"
+                class="list-group-item"
+        >
+            {{index}} : {{key}} : {{value}}
+        </li>
+    </ul>
+
+</div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.js"></script>
+
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            gender: 'female',
+            name: 'Daria',
+            attr: {
+                height: '168cm',
+                weight: '55kg',
+                eyeColor: 'gray'
+            }
+        }
+
+    })
+</script>
+</html>

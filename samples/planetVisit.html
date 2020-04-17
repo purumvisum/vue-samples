@@ -1,0 +1,47 @@
+<html>
+<head>
+    <title>Привет, Vue</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet"
+</head>
+<body>
+<div class="container">
+    <ul class="list-group">
+        <Planet v-for="(planet, index) in planets" :key="index" :planet="planet"></Planet>
+    </ul>
+</div>
+<template id="planet-template">
+    <li class="list-group-item">
+        <span>Name:</span> <span>{{planet.name}}</span><br/>
+        <span>Number of visits:</span> <span>{{planet.visitNumber}}</span>
+        <button
+                class="btn btn-default"
+                v-if="planet.visitNumber < 3"
+                type="button"
+                @click="planet.visitNumber++"
+        >Visit</button>
+        <span v-show="planet.visitNumber > 0" class="fa fa-rocket fa-2x pull-right" aria-hidden="true"></span>
+    </li>
+</template>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.js"></script>
+
+<script>
+
+    Vue.component('Planet', {
+        template: '#planet-template',
+        props: ['planet']
+    });
+
+    new Vue({
+        el: '.container',
+        data: {
+            planets: [
+                {name: 'Mercury', visitNumber: 0},
+                {name: 'Venus', visitNumber: 0},
+                {name: 'Earth', visitNumber: 0},
+            ]
+        }
+    })
+</script>
+</html>

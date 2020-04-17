@@ -1,0 +1,59 @@
+<html>
+<head>
+    <title>Привет, Vue</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+<div class="container">
+    <h1>! desc ages</h1>
+    <ul class="list-group">
+        <li
+                v-for="(person, index) in orderedPeoples"
+                :key="index"
+        >
+            {{ person.name }} age {{ person.age }}
+        </li>
+    </ul>
+    <h1>! old peoples > 65</h1>
+    <ul class="list-group">
+        <li
+                v-for="(person, index) in old"
+                :key="index"
+        >
+            {{ person.name }} age {{ person.age }}
+        </li>
+    </ul>
+</div>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.js"></script>
+
+<script>
+    new Vue({
+        el: '.container',
+        data: {
+            people: [
+                {name: 'Обеликс', age: 33},
+                {name: 'Астерикс', age: 32},
+                {name: 'Маджестикс', age: 82},
+                {name: 'Ветераникс', age: 103},
+                {name: 'Юлий Цезарь', age: 66},
+                {name: 'Юлий Цезарь', age: 66},
+            ]
+        },
+        computed: {
+            old: function () {
+                return this.people.filter((person) => {
+                    if (person.age > 65) {
+                        return person
+                    }
+                })
+            },
+            orderedPeoples: function () {
+                return this.people.sort(function(a, b) {
+                    return b['age'] - a['age'];
+                })
+            }
+        }
+    })
+</script>
+</html>

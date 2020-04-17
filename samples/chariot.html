@@ -1,0 +1,71 @@
+<html>
+<head>
+    <title>Привет, Vue</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" rel="stylesheet"
+</head>
+<body>
+<div class="container">
+    <ul class="list-group">
+        <Chariot
+                @choosen='itemChoose'
+                v-for="(chariot, index) in chariots" :key="index" :chariot="chariot"
+        ></Chariot>
+    </ul>
+</div>
+<template id="chariot-template">
+    <li class="list-group-item">
+        <span>Name:</span> <span>{{chariot.name}}</span><br/>
+        <span>Number of horses:</span><span>{{chariot.horses}}</span>
+        <button
+                @click="choose"
+        >
+            {{chariot.text || 'text'}}
+        </button>
+    </li>
+</template>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.17/vue.js"></script>
+
+<script>
+
+    Vue.component('Chariot', {
+        template: '#chariot-template',
+        props: ['chariot'],
+        methods: {
+            choose: function (event) {
+                this.chariot.text='В путь'
+                this.$emit('choosen', this.chariot.name, this.chariot.horses)
+            }
+        }
+    });
+
+    new Vue({
+        el: '.container',
+        data: {
+            chariots: [
+                {name: "Олимп", horses: 4, text: 'choose'},
+                {name: "Саггита", horses: 3, text: 'choose'},
+                {name: "Икар", horses: 2, text: 'choose'},
+                {name: "Абраксас", horses: 1, text: 'choose'}
+            ]
+        },
+        methods:
+            {
+                itemChoose: function (name, horsesNumber) {
+                    console.log(name)
+                    console.log('herer');
+                    this.chariots.forEach((chariot)=> {
+                        if(chariot.name !== name) {
+                            if (chariot.horses > horsesNumber) {
+                                chariot.text = 'Нанять лошадей'
+                            } else {
+                                chariot.text = 'Oтклонить лошадей'
+                            }
+                        }
+                    })
+                }
+            }
+    })
+</script>
+</html>
